@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Confeitaria Jaspe</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3e7d3; /* bege */
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      background: #e6d3b1;
+      padding: 20px;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .categoria button {
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background: #c9a66b;
+      color: white;
+    }
+
+    .box {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 15px;
+      display: none;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    input[type="number"] {
+      width: 60px;
+    }
+
+    .enviar {
+      margin-top: 20px;
+      padding: 15px;
+      width: 100%;
+      background: #25d366;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>Confeitaria Jaspe</header>
+
+<div class="container">
+
+  <div class="categoria">
+    <button onclick="mostrar('bolos')">🍰 Bolos</button>
+    <button onclick="mostrar('salgados')">🥟 Salgados</button>
+    <button onclick="mostrar('doces')">🧁 Docinhos</button>
+  </div>
+
+  <!-- BOLOS -->
+  <div id="bolos" class="box">
+    <h3>Bolos (preço por kg)</h3>
+
+    <div class="item">
+      Bolo simples — R$ 40/kg
+      <input type="number" id="boloSimples" min="0">
+    </div>
+
+    <div class="item">
+      Bolo recheado — R$ 55/kg
+      <input type="number" id="boloRecheado" min="0">
+    </div>
+  </div>
+
+  <!-- SALGADOS -->
+  <div id="salgados" class="box">
+    <h3>Salgados (preço por cento)</h3>
+
+    <div class="item">
+      Coxinha — R$ 120
+      <input type="number" id="coxinha" min="0">
+    </div>
+
+    <div class="item">
+      Enroladinho — R$ 110
+      <input type="number" id="enroladinho" min="0">
+    </div>
+  </div>
+
+  <!-- DOCES -->
+  <div id="doces" class="box">
+    <h3>Docinhos (preço por cento)</h3>
+
+    <div class="item">
+      Brigadeiro — R$ 100
+      <input type="number" id="brigadeiro" min="0">
+    </div>
+
+    <div class="item">
+      Beijinho — R$ 95
+      <input type="number" id="beijinho" min="0">
+    </div>
+  </div>
+
+  <button class="enviar" onclick="enviarPedido()">📲 Enviar pedido no WhatsApp</button>
+
+</div>
+
+<script>
+  // Mostrar a categoria selecionada
+  function mostrar(id) {
+    document.querySelectorAll('.box').forEach(box => box.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+  }
+
+  // Enviar pedido pelo WhatsApp
+  function enviarPedido() {
+    let texto = "Pedido - Confeitaria Jaspe%0A%0A";
+
+    function add(nome, id) {
+      let qtd = document.getElementById(id).value;
+      if (qtd > 0) texto += `${nome}: ${qtd}%0A`;
+    }
+
+    // Bolos
+    add("Bolo simples (kg)", "boloSimples");
+    add("Bolo recheado (kg)", "boloRecheado");
+
+    // Salgados
+    add("Coxinha (cento)", "coxinha");
+    add("Enroladinho (cento)", "
